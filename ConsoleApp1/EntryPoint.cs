@@ -68,7 +68,7 @@ public class EntryPoint
         IAlert alert = driver.SwitchTo().Alert();
         Console.WriteLine(alert.Text);
         Thread.Sleep(3000);
-        alert.Accept();
+        alert.Accept(); 
         try
         {
             IWebElement imgAfterAlert = driver.FindElement(By.CssSelector("#post-119 > div > figure > img"));
