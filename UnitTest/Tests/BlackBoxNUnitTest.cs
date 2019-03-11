@@ -6,11 +6,17 @@ using UnitTest.Pages;
 namespace SetupEnvironmentTest.Tests
 {
     [TestFixture]
+    //[Parallelizable(ParallelScope.All)]
     class BlackBoxNUnitTest
     {
         static IWebDriver _driver;
         static string _url;
         static PageLogin _pageLogin;
+
+        private static string [][] _loginParams = {
+                                                    new string[] { "admin", "demo123" },
+                                                   // new string[] { "admin1", "demo123" }
+                                                  };
     
          
 
@@ -42,15 +48,17 @@ namespace SetupEnvironmentTest.Tests
             _driver.Navigate().GoToUrl(_url);
         }
 
-        [Test]
-        [TestCase("admin", "demo123", ExpectedResult = true)]
-        public bool TestMethodLogin(string login, string password)
+       // [Test, TestCaseSource(nameof(_loginParams))]
+        //[Test, TestCase("admin", "demo123"/*, ExpectedResult = true*/)]
+        public void TestMethodLogin(string login /*[Values("admin", "admin1")]*/, string password/*[Values("demo123", "demo123")]*/)
         {
             _driver.Navigate().GoToUrl(_url);
             _pageLogin.TypeLoginName(login);
             _pageLogin.TypePassword(password);
             _pageLogin.ClickOnLoginButton();
-            return true;
+
+            Assert.IsTrue(_pageLogin.VerifyIfLoggedIn());
+
         }
 
         [OneTimeTearDown]

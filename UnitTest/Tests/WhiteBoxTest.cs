@@ -1,11 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace UnitTest
+namespace SetupEnvironmentTest
 {
     [TestClass]
     public class WhiteBoxTest
     {
-        [TestMethod]
+        //[TestMethod]
         public void FormulaEvalPositive()
         {
             //arrange
