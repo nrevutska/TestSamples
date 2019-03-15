@@ -69,6 +69,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\UserRepository.cs" />
+    <Compile Include="Data\User.cs" />
     <Compile Include="Pages\PageLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\BlackBoxNUnitTest.cs" />
