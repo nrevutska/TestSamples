@@ -11,7 +11,7 @@ namespace UnitTest.Data
         private volatile static UserRepository instance;
         private static object lockingObject = new object();
 
-        public UserRepository Get()
+        public static UserRepository Get()
         {
             if(instance == null)
             {
@@ -26,7 +26,11 @@ namespace UnitTest.Data
 
         public IUser Registered()
         {
-            return new User();
+            return new User("admin", "demo123");
+        }
+        public IUser Invalid()
+        {
+            return new User("haha", "demo123");
         }
     }
 }

@@ -72,6 +72,8 @@
     <Compile Include="Data\UserRepository.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="Pages\PageLogin.cs" />
+    <Compile Include="Pages\PageRegistratorHome.cs" />
+    <Compile Include="Pages\PageRepeatLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\BlackBoxNUnitTest.cs" />
     <Compile Include="Tests\BlackBoxTest.cs" />

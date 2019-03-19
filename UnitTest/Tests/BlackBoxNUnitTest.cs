@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using UnitTest.Data;
 using UnitTest.Pages;
 
 namespace SetupEnvironmentTest.Tests
@@ -9,14 +10,19 @@ namespace SetupEnvironmentTest.Tests
     //[Parallelizable(ParallelScope.All)]
     class BlackBoxNUnitTest
     {
-        static IWebDriver _driver;
-        static string _url;
-        static PageLogin _pageLogin;
+        static IWebDriver driver;
+        static string url;
+        static PageLogin pageLogin;
 
-        private static string [][] _loginParams = {
+        private static string [][] loginValidParams = {
                                                     new string[] { "admin", "demo123" },
                                                    // new string[] { "admin1", "demo123" }
                                                   };
+        private static readonly IUser[] validUsers =
+        {
+            UserRepository.Get().Registered(),
+            UserRepository.Get().Registered()
+        };
     
          
 
@@ -37,34 +43,45 @@ namespace SetupEnvironmentTest.Tests
         [OneTimeSetUp]
         public void ClassInitialize()
         {
-            _url = "http://demosite.center/wordpress/wp-login.php";
-            _driver = new ChromeDriver();
-            _pageLogin = new PageLogin(_driver);
+            url = "http://demosite.center/wordpress/wp-login.php";
+            driver = new ChromeDriver();
+            pageLogin = new PageLogin(driver);
         }
 
         [SetUp]
         public void TestInitialize()
         {
-            _driver.Navigate().GoToUrl(_url);
+            driver.Navigate().GoToUrl(url);
         }
 
        // [Test, TestCaseSource(nameof(_loginParams))]
         //[Test, TestCase("admin", "demo123"/*, ExpectedResult = true*/)]
         public void TestMethodLogin(string login /*[Values("admin", "admin1")]*/, string password/*[Values("demo123", "demo123")]*/)
         {
-            _driver.Navigate().GoToUrl(_url);
-            _pageLogin.TypeLoginName(login);
-            _pageLogin.TypePassword(password);
-            _pageLogin.ClickOnLoginButton();
+            driver.Navigate().GoToUrl(url);
 
-            Assert.IsTrue(_pageLogin.VerifyIfLoggedIn());
+            pageLogin.SuccessfulLogin(new User(login, password));
+            Assert.IsTrue(pageLogin.VerifyIfLoggedIn());
 
+        }
+        [Test, TestCaseSource(nameof(validUsers))]
+        public void LoginTest(IUser validRegistrator)
+        {
+            PageRegistratorHome pageRegistratorHome = new PageLogin(driver).SuccessfulLogin(validRegistrator);
+            Assert.AreEqual(validRegistrator.Login, pageRegistratorHome.GetLoginNameText());
+        }
+
+        //[Test]
+        public void LoginUnsuccessTest()
+        {
+            PageRepeatLogin pageRepeatLogin = new PageLogin(driver).UnSuccessfulLogin(UserRepository.Get().Invalid());
+            Assert.IsTrue(pageRepeatLogin.LoginErrorDiv.Displayed);
         }
 
         [OneTimeTearDown]
         public void ClassCleanup()
         {
-            _driver.Quit();
+            driver.Quit();
         }
     }
 }

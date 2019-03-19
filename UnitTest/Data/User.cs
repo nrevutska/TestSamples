@@ -11,13 +11,21 @@ namespace UnitTest.Data
         public string Login { get; set; }
         public string Password { get; set; }
 
+        public User() { }
+
+        public User(string login, string password)
+        {
+            Login = login;
+            Password = password;
+        }
+
         //public IUser Registered()
         //{
         //    return new User();
         //}
     }
 
-    internal interface IUser
+    public interface IUser
     {
         string Login { get; set; }
         string Password { get; set; }
