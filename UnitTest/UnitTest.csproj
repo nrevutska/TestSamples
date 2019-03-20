@@ -69,6 +69,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Application\ApplicationSource.cs" />
+    <Compile Include="Data\Application\ApplicationSourceRepository.cs" />
     <Compile Include="Data\UserRepository.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="Pages\PageLogin.cs" />
@@ -80,6 +82,8 @@
     <Compile Include="Tests\BlackBoxNavigation.cs" />
     <Compile Include="Tests\WhiteBoxTest.cs" />
     <Compile Include="Tools\AExternalReader.cs" />
+    <Compile Include="Tools\Application.cs" />
+    <Compile Include="Tools\BrowserWrapper.cs" />
     <Compile Include="Tools\CSVReader.cs" />
   </ItemGroup>
   <ItemGroup>
