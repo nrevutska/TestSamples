@@ -56,6 +56,7 @@ namespace UnitTest.Tools
         public PageLogin LoadPageLogin()
         {
             Browser.OpenUrl(ApplicationSource.LoginUrl);
+            Browser.OpenUrl(ApplicationSource.LoginUrl);
             return new PageLogin(Browser.Driver);
         }
         public PageLogin LogoutAction()

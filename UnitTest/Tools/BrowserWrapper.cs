@@ -122,7 +122,7 @@ namespace UnitTest.Tools
         {
             if (namePrefix == null || namePrefix.Length == 0)
                 namePrefix = GetTime();            
-            File.WriteAllText(GetCurrentDirectory() + AExternalReader.PATH_SEPARATOR + namePrefix + SCREENSHOT_PNG, Driver.PageSource);
+            File.WriteAllText(GetCurrentDirectory() + AExternalReader.PATH_SEPARATOR + namePrefix + SOURCECODE_TXT, Driver.PageSource);
             return namePrefix;
         }
 

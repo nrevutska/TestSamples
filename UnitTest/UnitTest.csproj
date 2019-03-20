@@ -80,11 +80,13 @@
     <Compile Include="Tests\BlackBoxNUnitTest.cs" />
     <Compile Include="Tests\BlackBoxTest.cs" />
     <Compile Include="Tests\BlackBoxNavigation.cs" />
+    <Compile Include="Tests\SmokeTest.cs" />
     <Compile Include="Tests\WhiteBoxTest.cs" />
     <Compile Include="Tools\AExternalReader.cs" />
     <Compile Include="Tools\Application.cs" />
     <Compile Include="Tools\BrowserWrapper.cs" />
     <Compile Include="Tools\CSVReader.cs" />
+    <Compile Include="Tools\TestRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

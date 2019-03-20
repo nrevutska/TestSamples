@@ -69,7 +69,7 @@ namespace SetupEnvironmentTest.Tests
             Assert.IsTrue(pageLogin.VerifyIfLoggedIn());
 
         }
-        [Test, TestCaseSource(nameof(externalValidUsers))]
+        //[Test, TestCaseSource(nameof(externalValidUsers))]
         public void LoginTest(IUser validRegistrator)
         {
             PageRegistratorHome pageRegistratorHome = new PageLogin(driver).SuccessfulLogin(validRegistrator);
