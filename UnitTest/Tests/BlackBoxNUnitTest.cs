@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System.Collections.Generic;
+using System.Linq;
 using UnitTest.Data;
 using UnitTest.Pages;
 
@@ -21,26 +23,29 @@ namespace SetupEnvironmentTest.Tests
         private static readonly IUser[] validUsers =
         {
             UserRepository.Get().Registered(),
+            UserRepository.Get().Registered(),
             UserRepository.Get().Registered()
         };
-    
-         
+        private static readonly IUser[] externalValidUsers = UserRepository.Get().FromCSV().ToArray<IUser>();
+       
 
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use OneTimeSetUp to run code before running the first test in the class
-        //
-        // Use OneTimeTearDown to run code after all tests in a class have run
-        //
-        // Use Setup to run code before running each test 
-        //
-        // Use TearDown to run code after each test has run
-        //
-        #endregion
 
-        [OneTimeSetUp]
+
+    #region Additional test attributes
+    //
+    // You can use the following additional attributes as you write your tests:
+    //
+    // Use OneTimeSetUp to run code before running the first test in the class
+    //
+    // Use OneTimeTearDown to run code after all tests in a class have run
+    //
+    // Use Setup to run code before running each test 
+    //
+    // Use TearDown to run code after each test has run
+    //
+    #endregion
+
+    [OneTimeSetUp]
         public void ClassInitialize()
         {
             url = "http://demosite.center/wordpress/wp-login.php";
@@ -64,7 +69,7 @@ namespace SetupEnvironmentTest.Tests
             Assert.IsTrue(pageLogin.VerifyIfLoggedIn());
 
         }
-        [Test, TestCaseSource(nameof(validUsers))]
+        [Test, TestCaseSource(nameof(externalValidUsers))]
         public void LoginTest(IUser validRegistrator)
         {
             PageRegistratorHome pageRegistratorHome = new PageLogin(driver).SuccessfulLogin(validRegistrator);

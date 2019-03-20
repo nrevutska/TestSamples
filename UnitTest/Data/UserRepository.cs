@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitTest.Tools;
 
 namespace UnitTest.Data
 {
@@ -31,6 +32,15 @@ namespace UnitTest.Data
         public IUser Invalid()
         {
             return new User("haha", "demo123");
+        }
+
+        public IList<IUser> FromCSV()
+        {
+            return FromCSV("UsersCSV.csv");
+        }
+        public IList<IUser> FromCSV(string filename)
+        {
+            return User.GetAllUsers(new CSVReader(filename));
         }
     }
 }
