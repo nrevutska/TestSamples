@@ -1,4 +1,6 @@
-﻿using UnitTest.Data.Application;
+﻿using System.Collections.Generic;
+using System.Threading;
+using UnitTest.Data.Application;
 using UnitTest.Pages;
 
 namespace UnitTest.Tools
@@ -6,19 +8,32 @@ namespace UnitTest.Tools
     public class Application
     {
         private volatile static Application instance;
+        private Dictionary<int, BrowserWrapper> _browser = new Dictionary<int, BrowserWrapper>();
         private static object lockingObject = new object();
 
+        //TODO Change for parallel work
         public ApplicationSource ApplicationSource { get; private set; }
-        public BrowserWrapper Browser { get; private set; }
+
+        // Parallel work in multithreading
+        public BrowserWrapper Browser
+        {
+            get
+            {
+                int currentThread = Thread.CurrentThread.ManagedThreadId;
+                if (!_browser.ContainsKey(currentThread))
+                    InitBrowser(currentThread);
+                return _browser[currentThread];
+            }
+        }
 
         private Application(ApplicationSource applicationSource)
         {
             ApplicationSource = applicationSource;
         }
 
-        private void InitBrowser(ApplicationSource applicationSource)
+        private void InitBrowser(int currentThread)
         {
-            Browser = new BrowserWrapper(applicationSource);
+            _browser.Add(currentThread, new BrowserWrapper(this.ApplicationSource));
         }
         private void InitSearch(ApplicationSource applicationSource)
         { }
@@ -37,8 +52,6 @@ namespace UnitTest.Tools
                         if (applicationSource == null)
                             applicationSource = ApplicationSourceRepository.Default();
                         instance = new Application(applicationSource);
-                        instance.InitBrowser(applicationSource);
-                        instance.InitSearch(applicationSource);
                     }
             return instance;
         }
@@ -47,7 +60,8 @@ namespace UnitTest.Tools
         {
             if (instance != null)
             {
-                Get().Browser.Quit();
+                foreach (KeyValuePair<int, BrowserWrapper> kvp in instance._browser)
+                    kvp.Value.Quit();
                 // Close DB connection etc...
                 instance = null;
             }

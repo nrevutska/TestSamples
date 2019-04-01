@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,10 +33,13 @@ namespace UnitTest.Tools
         [TearDown]
         public void TearDown()
         {
-            if (!isTestSuccess)
+            //if (!isTestSuccess)
+            //    Application.Get().SaveCurrentState();
+
+            if(TestContext.CurrentContext.Result.Outcome.Equals(TestStatus.Failed))
                 Application.Get().SaveCurrentState();
-            Application.Get().LogoutAction();
-        }
+             Application.Get().LogoutAction();
+       }
 
         protected PageLogin StartApplication()
         {
