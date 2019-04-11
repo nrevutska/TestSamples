@@ -96,9 +96,9 @@
     <None Include="Resources\UsersExcel.xlsx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConsoleApp1\SetupEnvironmenr.csproj">
+    <ProjectReference Include="..\ConsoleApp1\SetupEnvironment.csproj">
       <Project>{5c7d826b-2058-492d-ba0a-b947981abd62}</Project>
-      <Name>SetupEnvironmenr</Name>
+      <Name>SetupEnvironment</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

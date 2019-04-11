@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetupEnvironmenr", "ConsoleApp1\SetupEnvironmenr.csproj", "{5C7D826B-2058-492D-BA0A-B947981ABD62}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetupEnvironment", "ConsoleApp1\SetupEnvironment.csproj", "{5C7D826B-2058-492D-BA0A-B947981ABD62}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{FAC7EEF4-1C4A-44BC-8363-4FF2481A079F}"
 EndProject
